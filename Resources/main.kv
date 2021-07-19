@@ -1,0 +1,134 @@
+#kivy 2.0
+ScreenManager:
+    MainScreen:
+    ResultScreen:
+<IconListItem>
+
+    IconLeftWidget:
+        icon: root.icon
+<MainScreen>:
+    name:"Main"
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: "Flight price prediction"
+            left_action_items:[["airplane",lambda x:x]]
+            right_action_items:[["theme-light-dark",lambda x:app.show_theme_picker()]]
+            elevation:15
+        Widget:
+            halign:"center"
+            size_hint:(0.1,0.1)
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing:20
+            padding:5
+            MDCard:
+                pos_hint:{"center_x":0.5,"center_y":0.7}
+                size_hint:(0.8,0.1)
+                elevation:5
+                MDBoxLayout:
+                    orientation: "vertical"
+                    pos_hint:{"center_x":0.5,"center_y":0.5}
+                    spacing:8
+                    padding:10
+                    MDLabel:
+                        id:Date_Label
+                        text: "DD/MM/YYYY - DD/MM/YYYY"
+                        halign: "center"
+                    MDFillRoundFlatIconButton:
+                        icon: "calendar"
+                        text: "Select Dates"
+                        pos_hint:{"center_x":0.5,"center_y":0.5}
+                        halign:"center"
+                        on_release:root.show_date_picker()
+            MDCard:
+                pos_hint:{"center_x":0.5,"center_y":0.5}
+                size_hint:(0.8,0.1)
+                elevation:5
+                MDBoxLayout:
+                    orientation: "vertical"
+                    pos_hint:{"center_x":0.5,"center_y":0.5}
+                    spacing:8
+                    padding:10
+                    MDLabel:
+                        text: "Source"
+                        halign: "center"
+                    MDFillRoundFlatIconButton:
+                        id: source_button
+                        text: "Select source"
+                        icon:"arrow-down-drop-circle"
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        elevation:10
+                        on_release: root.Source_dropdown_items()
+                        MDIcon:
+                            icon:"blank"
+            MDCard:
+                pos_hint:{"center_x":0.5,"center_y":0.1}
+                size_hint:(0.8,0.1)
+                elevation:5
+                MDBoxLayout:
+                    orientation: "vertical"
+                    pos_hint:{"center_x":0.5,"center_y":0.5}
+                    spacing:8
+                    padding:10
+                    MDLabel:
+                        text: "Destination"
+                        halign: "center"
+                    MDFillRoundFlatIconButton:
+                        id: destination_button
+                        text: "Select Destination"
+                        icon:"arrow-down-drop-circle"
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        elevation:10
+                        on_release: root.Destination_dropdown_items()
+                        MDIcon:
+                            icon:"blank"
+            MDCard:
+                pos_hint:{"center_x":0.5,"center_y":0.7}
+                size_hint:(0.8,0.1)
+                elevation:5
+                MDBoxLayout:
+                    orientation: "vertical"
+                    pos_hint:{"center_x":0.5,"center_y":0.5}
+                    spacing:8
+                    padding:10
+                    MDLabel:
+                        text: "Stopage"
+                        halign: "center"
+                    MDFillRoundFlatIconButton:
+                        id: stopage_button
+                        text: "Stopage"
+                        icon:"arrow-down-drop-circle"
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        elevation:10
+                        on_release: root.stopage_dropdown_items()
+                        MDIcon:
+                            icon:"blank"
+        MDBottomAppBar:
+            MDToolbar:
+                elevation:15
+                round:20
+                mode:"end"
+                type:"bottom"
+                icon:"arrow-right-circle"
+                on_action_button:
+                    root.manager.current="Result"
+<ResultScreen>:
+    name:"Result"
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: "Result"
+            left_action_items:[["keyboard-backspace",lambda x:root.back()]]
+            right_action_items:[["theme-light-dark",lambda x:app.show_theme_picker()]]
+            elevation:15
+        Widget:
+            halign:"center"
+            size_hint:(0.1,0.1)
+        MDBottomAppBar:
+            MDToolbar:
+                elevation:15
+                icon:"help"
+                mode:"end"
+                type:"bottom"
+                on_action_button:root.help()
